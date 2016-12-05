@@ -9,12 +9,13 @@ public class WaterBowl {
 	/**
 	 * refills to full
 	 */
-	public synchronized void refill(){
-		
+	public void refill(){
+		currentWaterLevel = maxWaterLevel;
 	}
 	
-	public synchronized void refill(float ammountOfWater){
-		this.currentWaterLevel += ammountOfWater;
-		//if
+	public void refill(float ammountOfWater){
+		currentWaterLevel += ammountOfWater;
+		
+		if(currentWaterLevel > maxWaterLevel) currentWaterLevel = maxWaterLevel;
 	}
 }

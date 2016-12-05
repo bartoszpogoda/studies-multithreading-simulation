@@ -1,14 +1,32 @@
 package threads;
 
+import model.WaterBowlList;
+
 public class World implements Runnable {
 	
 	private volatile float hydrationStep;
-	private volatile float hydrationInterval;
+	private volatile int hydrationInterval;
+	
+	private WaterBowlList waterBowlList;
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
+		waterBowlList.refillAll(hydrationStep);
+		
+		try {
+			Thread.sleep(hydrationInterval);
+		} catch (InterruptedException e) {
+			
+		}
 
 	}
+	
+	public void setHydrationStep(float hydrationStep){
+		this.hydrationStep = hydrationStep;
+	}
 
+	public void setHydrationInterval(int hydrationInterval){
+		this.hydrationInterval = hydrationInterval;
+	}
 }
