@@ -29,4 +29,8 @@ public class World implements Runnable {
 	public void setHydrationInterval(int hydrationInterval){
 		this.hydrationInterval = hydrationInterval;
 	}
+	
+	public World(WaterBowlList waterBowlList){
+		this.waterBowlList = waterBowlList;
+	}
 }

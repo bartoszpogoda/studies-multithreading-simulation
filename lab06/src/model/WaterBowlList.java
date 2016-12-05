@@ -36,20 +36,31 @@ public class WaterBowlList {
 		int nextBowl = firstBowl + 1;
 		if(nextBowl > 2) nextBowl = 0;
 		
+		int whichBowlToUse = -1;
+		
 		synchronized(avaliabilityOfWaterBowls){
-			if(avaliabilityOfWaterBowls.get(firstBowl) && avaliabilityOfWaterBowls.get(nextBowl)){
-				// check which has more water
-			}
-			else if(avaliabilityOfWaterBowls.get(firstBowl) && !avaliabilityOfWaterBowls.get(nextBowl)){
-				// use first and leave synchronized block -- variable outside
-			}
-			else if(!avaliabilityOfWaterBowls.get(firstBowl) && avaliabilityOfWaterBowls.get(nextBowl)){
-				// use snd and leave synchronized block -- variable outside
-			}
-			else{
-				// wait() ?
+			while(whichBowlToUse != -1){
+				if(avaliabilityOfWaterBowls.get(firstBowl) && avaliabilityOfWaterBowls.get(nextBowl)){
+					//TODO check which has more water, decide and block that one
+				}
+				else if(avaliabilityOfWaterBowls.get(firstBowl) && !avaliabilityOfWaterBowls.get(nextBowl)){
+					whichBowlToUse = firstBowl;
+					avaliabilityOfWaterBowls.set(whichBowlToUse, false);
+				}
+				else if(!avaliabilityOfWaterBowls.get(firstBowl) && avaliabilityOfWaterBowls.get(nextBowl)){
+					whichBowlToUse = nextBowl;
+					avaliabilityOfWaterBowls.set(whichBowlToUse, false);
+				}
+				else{
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						
+					}
+				}
 			}
 		}
+		
 		
 		
 		return 0; //for now
