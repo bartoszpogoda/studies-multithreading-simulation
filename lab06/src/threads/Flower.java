@@ -1,6 +1,6 @@
 package threads;
 
-import App.Settings;
+import App.Constants;
 import model.WaterBowlList;
 import view.DrawableFlower;
 
@@ -18,14 +18,14 @@ public class Flower extends Thread implements DrawableFlower {
 		this.waterBowlList = waterBowlList;
 		this.number = number;
 		
-		this.hydrationLevel = Settings.INIT_HYDRATION_LEVEL;
-		this.dehydrationLimit = Settings.DEFAULT_DEHYDRATION_LIMIT;
-		this.dehydrationStep = Settings.DEFAULT_DEHYDRATION_STEP;
+		this.hydrationLevel = Constants.INIT_HYDRATION_LEVEL;
+		this.dehydrationLimit = Constants.DEFAULT_DEHYDRATION_LIMIT;
+		this.dehydrationStep = Constants.DEFAULT_DEHYDRATION_STEP;
 	}
 	
 	@Override
 	public void run() {
-		while(dehydrationCycleCounter != Settings.CYCLES_OF_DEHYDRATION_TO_DIE){
+		while(dehydrationCycleCounter != Constants.CYCLES_OF_DEHYDRATION_TO_DIE){
 			
 			System.out.println("Flower " + number + " Hydration: " + hydrationLevel);
 			
@@ -45,7 +45,7 @@ public class Flower extends Thread implements DrawableFlower {
 			}
 			
 			try {
-				sleep(Settings.DEHYDRATION_MS_INTERAVAL);
+				sleep(Constants.DEHYDRATION_MS_INTERAVAL);
 			} catch (InterruptedException e) {
 			}
 			
