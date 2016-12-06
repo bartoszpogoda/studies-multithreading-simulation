@@ -2,7 +2,7 @@ package model;
 
 public class WaterBowl {
 	private float maxWaterLevel = 100;
-	private float currentWaterLevel;
+	private float currentWaterLevel = 100;
 	
 	// empty --> currentWaterLevel == 0
 	// maxWaterLevel - 100? - %?
@@ -30,4 +30,9 @@ public class WaterBowl {
 			return currentWaterLevel;
 		}
 	}
+	
+	public float getAmountOfWater(){
+		return currentWaterLevel;
+	}
+	
 }

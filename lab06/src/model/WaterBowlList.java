@@ -13,6 +13,10 @@ public class WaterBowlList {
 		this.waterBowlList = new ArrayList<WaterBowl>();
 		this.avaliabilityOfWaterBowls = new ArrayList<Boolean>();
 		
+		waterBowlList.add(new WaterBowl());
+		waterBowlList.add(new WaterBowl());
+		waterBowlList.add(new WaterBowl());
+		
 		avaliabilityOfWaterBowls.add(true);
 		avaliabilityOfWaterBowls.add(true);
 		avaliabilityOfWaterBowls.add(true);
@@ -41,9 +45,15 @@ public class WaterBowlList {
 		int whichBowlToUse = -1;
 		
 		synchronized(avaliabilityOfWaterBowls){
-			while(whichBowlToUse != -1){
+			while(whichBowlToUse == -1){
 				if(avaliabilityOfWaterBowls.get(firstBowl) && avaliabilityOfWaterBowls.get(nextBowl)){
-					//TODO check which has more water, decide and block that one
+					if(waterBowlList.get(firstBowl).getAmountOfWater() >= waterBowlList.get(nextBowl).getAmountOfWater()){
+						whichBowlToUse = firstBowl;
+					} else{
+						whichBowlToUse = nextBowl;
+					}
+
+					avaliabilityOfWaterBowls.set(whichBowlToUse, false);
 				}
 				else if(avaliabilityOfWaterBowls.get(firstBowl) && !avaliabilityOfWaterBowls.get(nextBowl)){
 					whichBowlToUse = firstBowl;
