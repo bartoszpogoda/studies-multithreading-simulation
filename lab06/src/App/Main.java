@@ -5,7 +5,9 @@ import model.WaterBowlList;
 import threads.Flower;
 
 public class Main {
-
+	
+	// polaczyc te watki w jakis ThreadPool czy cos i zrobic przycisk pause + run ? 
+	
 	public static void main(String[] args) {
 		WaterBowlList waterBowlList = new WaterBowlList();
 		
