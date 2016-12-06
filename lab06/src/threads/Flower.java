@@ -29,20 +29,13 @@ public class Flower extends Thread implements DrawableFlower {
 			
 			System.out.println("Flower " + number + " Hydration: " + hydrationLevel);
 			
-			hydrationLevel -= dehydrationStep;
-			
-			if(hydrationLevel <= 0){				
-				hydrationLevel = 0;
-				dehydrationCycleCounter++;
-			} else{
-				dehydrationCycleCounter = 0;
-			}
+			dehydratingProcess();
 			
 			if(hydrationLevel <= dehydrationLimit){
-				float waterDrained = waterBowlList.askForWater(number, hydrationLevel);
-				hydrationLevel += waterDrained;
-				if(hydrationLevel > 100) hydrationLevel = 100;
+				drinkingProcess();
 			}
+			
+			dyingProcess();
 			
 			try {
 				sleep(Constants.DEHYDRATION_MS_INTERAVAL);
@@ -50,8 +43,31 @@ public class Flower extends Thread implements DrawableFlower {
 			}
 			
 		}
+		
+		System.out.println("Flower " + number + " has just died.");
 	}
-
+	
+	private void dehydratingProcess(){
+		hydrationLevel -= dehydrationStep;
+	}
+	
+	private void drinkingProcess(){
+		float waterDrained = waterBowlList.askForWater(number, hydrationLevel);
+		hydrationLevel += waterDrained;
+		if(hydrationLevel > 100) hydrationLevel = 100;
+	}
+	
+	private void dyingProcess(){
+		if(hydrationLevel <= 0){				
+			hydrationLevel = 0;
+			dehydrationCycleCounter++;
+		} else{
+			dehydrationCycleCounter = 0;
+		}
+	}
+	
+	
+	
 	@Override
 	public float getHydrationLevel() {
 		return hydrationLevel;
