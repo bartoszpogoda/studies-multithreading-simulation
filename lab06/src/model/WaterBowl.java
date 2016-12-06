@@ -1,11 +1,15 @@
 package model;
 
+import App.Constants;
+
 public class WaterBowl {
-	private float maxWaterLevel = 100;
-	private float currentWaterLevel = 100;
+	private float maxWaterLevel;
+	private float currentWaterLevel;
 	
-	// empty --> currentWaterLevel == 0
-	// maxWaterLevel - 100? - %?
+	public WaterBowl(){
+		maxWaterLevel = Constants.WATER_BOWL_WATER_MAX_LEVEL;
+		currentWaterLevel = Constants.WATER_BOWL_WATER_INIT_LEVEL;
+	}
 	
 	/**
 	 * refills to full
@@ -23,14 +27,12 @@ public class WaterBowl {
 	public float drainWater(float hydrationLevel){
 		if(currentWaterLevel >= 100 - hydrationLevel){
 			currentWaterLevel -= (100 - hydrationLevel);
-			System.out.println("Needed" + (100 - hydrationLevel));
-			System.out.println("Left" + currentWaterLevel);
 			return (100 - hydrationLevel);
 		}
 		else{
 			float waterDrained = currentWaterLevel;
-			System.out.println("Got" + currentWaterLevel);
 			currentWaterLevel = 0;
+			
 			return waterDrained;
 		}
 	}
