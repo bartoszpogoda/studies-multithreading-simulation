@@ -13,14 +13,16 @@ public class WaterBowlList {
 		this.waterBowlList = new ArrayList<WaterBowl>();
 		this.avaliabilityOfWaterBowls = new ArrayList<Boolean>();
 		
-		for(Boolean b : avaliabilityOfWaterBowls){
-			b = true;
-		}
+		avaliabilityOfWaterBowls.add(true);
+		avaliabilityOfWaterBowls.add(true);
+		avaliabilityOfWaterBowls.add(true);
 	}
 	
 	public synchronized void refillAll(float ammountOfWater){
 		for(WaterBowl waterBowl : waterBowlList){
-			waterBowl.refill(ammountOfWater);
+			synchronized(waterBowl){
+				waterBowl.refill(ammountOfWater);
+			}
 		}
 	}
 	
@@ -30,7 +32,7 @@ public class WaterBowlList {
 	 * @param nthFlower index of flower which is asking - 0 1 or 2
 	 * @return water drained
 	 */
-	public float askForWater(int nthFlower){
+	public float askForWater(int nthFlower, float hydrationLevel){
 		
 		int firstBowl = nthFlower;
 		int nextBowl = firstBowl + 1;
@@ -53,7 +55,7 @@ public class WaterBowlList {
 				}
 				else{
 					try {
-						wait();
+						avaliabilityOfWaterBowls.wait();
 					} catch (InterruptedException e) {
 						
 					}
@@ -61,8 +63,21 @@ public class WaterBowlList {
 			}
 		}
 		
+		float waterDrained = 0;
+		
+		synchronized(waterBowlList.get(whichBowlToUse)){
+			WaterBowl waterBowl = waterBowlList.get(whichBowlToUse);
+			waterDrained = waterBowl.drainWater(hydrationLevel);
+		}
 		
 		
-		return 0; //for now
+		synchronized(avaliabilityOfWaterBowls){
+			avaliabilityOfWaterBowls.set(whichBowlToUse, true);
+			
+			avaliabilityOfWaterBowls.notify();
+		}
+		
+		
+		return waterDrained;
 	}
 }
