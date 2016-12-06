@@ -2,9 +2,9 @@ package threads;
 
 import App.Constants;
 import model.WaterBowlList;
-import view.DrawableFlower;
+import view.IFlowerGUI;
 
-public class Flower extends Thread implements DrawableFlower {
+public class Flower extends Thread implements IFlowerGUI {
 
 	private volatile float hydrationLevel;
 	private volatile float dehydrationLimit;
