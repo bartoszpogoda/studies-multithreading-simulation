@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaterBowlList {
+import view.IWaterBowlListGUI;
+
+public class WaterBowlList implements IWaterBowlListGUI {
 	
 	private List<WaterBowl> waterBowlList;
 	private List<Boolean> avaliabilityOfWaterBowls;
@@ -89,5 +91,26 @@ public class WaterBowlList {
 		
 		
 		return waterDrained;
+	}
+
+	@Override
+	public float[] getCurrentWaterLevels() {
+		float[] waterLevels = new float[3];
+		
+		for(int i=0 ; i < 3 ; i++){
+			synchronized(waterBowlList.get(i)){
+				waterLevels[i] = waterBowlList.get(i).getAmountOfWater();
+			}
+		}
+		
+		return waterLevels;
+	}
+
+	@Override
+	public void refill(int n) {
+		
+		synchronized(waterBowlList.get(n)){
+			waterBowlList.get(n).refill();
+		}
 	}
 }

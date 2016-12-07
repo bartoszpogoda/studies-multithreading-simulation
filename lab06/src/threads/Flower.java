@@ -49,6 +49,8 @@ public class Flower extends Thread implements IFlowerGUI {
 	
 	private void dehydratingProcess(){
 		hydrationLevel -= dehydrationStep;
+		
+		if(hydrationLevel < 0) hydrationLevel = 0;
 	}
 	
 	private void drinkingProcess(){

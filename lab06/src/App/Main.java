@@ -12,7 +12,9 @@ public class Main {
 		WaterBowlList waterBowlList = new WaterBowlList();
 		
 		Flower flower1 = new Flower(waterBowlList,0);
-		flower1.run();
+		Flower flower2 = new Flower(waterBowlList,1);
+		flower1.start();
+		flower2.start();
 
 	}
 

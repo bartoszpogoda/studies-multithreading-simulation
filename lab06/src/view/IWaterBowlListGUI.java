@@ -1,7 +1,7 @@
 package view;
 
 public interface IWaterBowlListGUI {
-	public float getCurrentWaterLevel();
+	public float[] getCurrentWaterLevels();
 	
 	//gardener
 	public void refill(int n);
