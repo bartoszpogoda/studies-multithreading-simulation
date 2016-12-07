@@ -1,4 +1,4 @@
-package threads;
+package model.threads;
 
 import model.WaterBowlList;
 import view.IWorldGUI;

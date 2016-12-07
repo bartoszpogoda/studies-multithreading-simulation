@@ -1,4 +1,4 @@
-package threads;
+package model.threads;
 
 import App.Constants;
 import model.WaterBowlList;

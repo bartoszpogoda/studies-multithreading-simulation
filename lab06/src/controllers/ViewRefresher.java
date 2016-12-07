@@ -1,4 +1,4 @@
-package view;
+package controllers;
 
 public class ViewRefresher extends Thread {
 	

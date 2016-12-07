@@ -2,7 +2,7 @@ package App;
 
 import model.WaterBowl;
 import model.WaterBowlList;
-import threads.Flower;
+import model.threads.Flower;
 
 public class Main {
 	
