@@ -170,11 +170,6 @@ public class MainViewImpl extends JFrame implements MainView {
 		
 	}
 	@Override
-	public void setNthFlowerDead(int n) {
-		flowerPanels[n].setDead();
-		
-	}
-	@Override
 	public void setMainViewController(MainViewController mainViewController) {
 		btnGardener1.addActionListener(mainViewController);
 		btnGardener1.setActionCommand("GARDENER_1");

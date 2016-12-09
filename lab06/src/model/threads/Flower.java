@@ -27,7 +27,6 @@ public class Flower extends Thread implements IFlowerGUI {
 	public void run() {
 		while(dehydrationCycleCounter != Constants.CYCLES_OF_DEHYDRATION_TO_DIE){
 			
-			System.out.println("Flower " + number + " Hydration: " + hydrationLevel);
 			
 			dehydratingProcess();
 			
@@ -83,6 +82,10 @@ public class Flower extends Thread implements IFlowerGUI {
 	@Override
 	public void setDehydrationStep(float dehydrationStep) {
 		this.dehydrationStep = dehydrationStep;
+	}
+
+	public int getDehydrationCycleCounter() {
+		return dehydrationCycleCounter;
 	}
 
 }

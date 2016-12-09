@@ -39,6 +39,7 @@ public class ViewRefresher extends Thread {
 			// flower data refresh
 			for(int i = 0 ; i < flowers.length ; i++){
 				mainView.setNthFlowerHydrationLevel(i, flowers[i].getHydrationLevel());
+				mainView.setNthFlowerDehydrationCycleCounter(i, flowers[i].getDehydrationCycleCounter());
 			}
 			
 			// water bowls data refresh
