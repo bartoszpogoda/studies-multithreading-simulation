@@ -7,6 +7,7 @@ import model.WaterBowl;
 import model.WaterBowlList;
 import model.threads.Flower;
 import view.MainView;
+import view.impl.FlowerPanelTestFrame;
 import view.impl.MainViewTestImpl;
 
 public class Main {
@@ -35,6 +36,10 @@ public class Main {
 		
 		flower1.start();
 		flower2.start();
+		
+		
+		//test
+		new FlowerPanelTestFrame();
 
 	}
 

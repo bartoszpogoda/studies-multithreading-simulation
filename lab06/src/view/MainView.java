@@ -7,4 +7,8 @@ public interface MainView {
 	public void setNthFlowerHydrationLevel(int n, float hydrationLevel);
 	
 	public void setMainViewController(MainViewController mainViewController);
+	
+	public String getNthFlowerDehydrationStep();
+	public String getNthFlowerDehydrationLimit();
+	
 }

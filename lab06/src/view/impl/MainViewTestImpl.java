@@ -13,6 +13,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
 public class MainViewTestImpl extends JFrame implements MainView {
 
@@ -27,9 +28,9 @@ public class MainViewTestImpl extends JFrame implements MainView {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {130, 200, 200, 200};
-		gridBagLayout.rowHeights = new int[] {200, 0, 0, 0, 200};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[] {200, 0, 0, 0, 0, 0, 200};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
 		flower1 = new JLabel("F1");
@@ -79,24 +80,25 @@ public class MainViewTestImpl extends JFrame implements MainView {
 		
 		btnNewButton = new JButton("New button");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 3;
 		getContentPane().add(btnNewButton, gbc_btnNewButton);
 		
 		btnNewButton_1 = new JButton("New button");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_1.gridx = 1;
 		gbc_btnNewButton_1.gridy = 3;
 		getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("New button");
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_2.gridx = 2;
 		gbc_btnNewButton_2.gridy = 3;
 		getContentPane().add(btnNewButton_2, gbc_btnNewButton_2);
+		
 		
 		this.setVisible(true);
 	}
