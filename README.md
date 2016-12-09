@@ -1,6 +1,6 @@
 # studies-multithreading-simulation
 
-The App should simulate flower lifetime (based on multithreading) and present current state on some GUI.
+App which simulates flower lifetime (based on multithreading) and presents current state on some GUI.
 
 Specification:
 - There are 3 flowers and 3 flowerpots
