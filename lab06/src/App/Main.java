@@ -8,7 +8,6 @@ import model.WaterBowlList;
 import model.threads.Flower;
 import view.MainView;
 import view.impl.MainViewImpl;
-import view.impl.MainViewTestImpl;
 
 public class Main {
 	
