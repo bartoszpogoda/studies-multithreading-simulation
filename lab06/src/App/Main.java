@@ -1,6 +1,8 @@
 package App;
 
+import controllers.MainViewController;
 import controllers.ViewRefresher;
+import controllers.impl.MainViewControllerImpl;
 import model.WaterBowl;
 import model.WaterBowlList;
 import model.threads.Flower;
@@ -24,6 +26,10 @@ public class Main {
 		viewRefresher.setWaterBowlList(waterBowlList);
 		viewRefresher.setMainView(mainView);
 		
+		MainViewController mainViewController = new MainViewControllerImpl();
+		mainViewController.setWaterBowlList(waterBowlList);
+		
+		mainView.setMainViewController(mainViewController);
 		
 		viewRefresher.start();
 		
