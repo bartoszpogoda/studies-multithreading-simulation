@@ -1,4 +1,4 @@
-package view.impl;
+package view.impl.graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,14 +7,14 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-public class FlowerPanel extends JPanel{
+public class WaterBowlPanel extends JPanel {
 	
-	private float hydrationLevel;
-	private float dehydrationLimit;
-	private float dehydrationStep;
-	private int dehydrationCycleCounter = 0;
+	private float currentWaterLevel;
 	
-	private Image flowerImage;
+	public void setCurrentWaterLevel(float currentWaterLevel){
+		this.currentWaterLevel = currentWaterLevel;
+		repaint();
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -22,14 +22,11 @@ public class FlowerPanel extends JPanel{
 		
 		Graphics2D g2d = (Graphics2D)g;
 		
-		//placeholder bef image
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 		
-		//test
-		hydrationLevel =  12.4f;
 		
-		int scaledY = (int)((hydrationLevel/100f)*this.getHeight());
+		int scaledY = (int)((currentWaterLevel/100f)*this.getHeight());
 
 		g2d.setColor(new Color(0.2f,0.6f,0.2f,(float)0.5));
 		g2d.fillRect(0, this.getHeight()-scaledY, this.getWidth(), scaledY);

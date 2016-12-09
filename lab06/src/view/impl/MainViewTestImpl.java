@@ -134,4 +134,28 @@ public class MainViewTestImpl extends JFrame implements MainView {
 		
 	}
 
+	@Override
+	public void setNthFlowerDehydrationCycleCounter(int n, int dehydrationCycleCounter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNthFlowerDead(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getNthFlowerDehydrationStep(int n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getNthFlowerDehydrationLimit(int n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

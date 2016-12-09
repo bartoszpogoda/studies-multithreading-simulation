@@ -6,8 +6,7 @@ import controllers.impl.MainViewControllerImpl;
 import model.WaterBowl;
 import model.WaterBowlList;
 import model.threads.Flower;
-import view.MainView;
-import view.impl.FlowerPanelTestFrame;
+import view.MainView view.impl.MainViewImpl;
 import view.impl.MainViewTestImpl;
 
 public class Main {
@@ -20,7 +19,7 @@ public class Main {
 		Flower flower1 = new Flower(waterBowlList,0);
 		Flower flower2 = new Flower(waterBowlList,1);
 		
-		MainView mainView = new MainViewTestImpl();
+		MainView mainView = new MainViewImpl();
 		
 		ViewRefresher viewRefresher = new ViewRefresher();
 		viewRefresher.setFlowers(new Flower[]{flower1,flower2});
@@ -37,10 +36,9 @@ public class Main {
 		flower1.start();
 		flower2.start();
 		
+		mainView.setVisible(true);
 		
-		//test
-		new FlowerPanelTestFrame();
-
+		
 	}
 
 }
