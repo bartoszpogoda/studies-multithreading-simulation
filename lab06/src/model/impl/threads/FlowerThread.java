@@ -14,13 +14,13 @@ public class FlowerThread extends Thread implements Flower {
 	
 	private WaterBowlListImpl waterBowlList;
 	
-	public FlowerThread(WaterBowlListImpl waterBowlList, int number){
+	public FlowerThread(WaterBowlListImpl waterBowlList, int number, float hydrationLevel, float dehydrationLimit, float dehydrationStep){
 		this.waterBowlList = waterBowlList;
 		this.number = number;
 		
-		this.hydrationLevel = Constants.INIT_HYDRATION_LEVEL;
-		this.dehydrationLimit = Constants.DEFAULT_DEHYDRATION_LIMIT;
-		this.dehydrationStep = Constants.DEFAULT_DEHYDRATION_STEP;
+		this.hydrationLevel = hydrationLevel;
+		this.dehydrationLimit = dehydrationLimit;
+		this.dehydrationStep = dehydrationStep;
 	}
 	
 	@Override
