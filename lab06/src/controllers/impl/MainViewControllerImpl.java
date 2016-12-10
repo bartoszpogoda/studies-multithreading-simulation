@@ -44,10 +44,32 @@ public class MainViewControllerImpl implements MainViewController{
 			flowerThreads[0].start();
 		}
 		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_2")){
-			waterBowlList.refill(2);
+			//data validation
+			float dehydrationLimit, dehydrationStep;
+			try{
+				dehydrationLimit = Float.parseFloat(mainView.getNthFlowerDehydrationLimit(1));
+				dehydrationStep = Float.parseFloat(mainView.getNthFlowerDehydrationStep(1));
+			}catch(NumberFormatException e){
+				mainView.reportError("Wartoœci musz¹ byæ typu float");
+				return;
+			}
+			flowerThreads[1].kill();
+			flowerThreads[1] = new FlowerThread(waterBowlList, 1, Constants.F2_INIT_HYDRATION_LEVEL, dehydrationLimit, dehydrationStep);
+			flowerThreads[1].start();
 		}
 		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_3")){
-			waterBowlList.refill(2);
+			//data validation
+			float dehydrationLimit, dehydrationStep;
+			try{
+				dehydrationLimit = Float.parseFloat(mainView.getNthFlowerDehydrationLimit(2));
+				dehydrationStep = Float.parseFloat(mainView.getNthFlowerDehydrationStep(2));
+			}catch(NumberFormatException e){
+				mainView.reportError("Wartoœci musz¹ byæ typu float");
+				return;
+			}
+			flowerThreads[2].kill();
+			flowerThreads[2] = new FlowerThread(waterBowlList, 2, Constants.F3_INIT_HYDRATION_LEVEL, dehydrationLimit, dehydrationStep);
+			flowerThreads[2].start();
 		}
 		
 	}

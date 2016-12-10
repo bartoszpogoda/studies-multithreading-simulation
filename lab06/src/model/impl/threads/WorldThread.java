@@ -8,16 +8,18 @@ public class WorldThread extends Thread implements World {
 	
 	private volatile float refillSpeed; 
 	private volatile int refillInterval;
-	private volatile boolean alive;
+	private volatile boolean alive = true;
 	
 	private WaterBowlListImpl waterBowlList;
 	
-	public WorldThread() {
+	
+	public WorldThread(WaterBowlListImpl waterBowlList){
+		this.waterBowlList = waterBowlList;
 		refillSpeed = Constants.WORLD_INIT_REFILL_SPEED;
 		refillInterval = Constants.WORLD_INIT_REFILL_INTERVAL;
 		alive = true;
 	}
-	
+
 	@Override
 	public void run() {
 		while(alive){
@@ -32,18 +34,6 @@ public class WorldThread extends Thread implements World {
 		System.out.println("World has just died");
 	}
 	
-	public void setHydrationStep(float hydrationStep){
-		this.refillSpeed = hydrationStep;
-	}
-
-	public void setHydrationInterval(int hydrationInterval){
-		this.refillInterval = hydrationInterval;
-	}
-	
-	public WorldThread(WaterBowlListImpl waterBowlList){
-		this.waterBowlList = waterBowlList;
-	}
-
 	@Override
 	public void setRefillSpeed(float refillSpeed) {
 		this.refillSpeed = refillSpeed;

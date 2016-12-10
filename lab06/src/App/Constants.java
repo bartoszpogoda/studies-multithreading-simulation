@@ -28,6 +28,6 @@ public class Constants {
 	public static final int VIEW_REFRESHER_INTERVAL = 1;
 	
 	//world constants
-	public static final float WORLD_INIT_REFILL_SPEED = 0.05f;
+	public static final float WORLD_INIT_REFILL_SPEED = 0.77f;
 	public static final int WORLD_INIT_REFILL_INTERVAL = 100;
 }
