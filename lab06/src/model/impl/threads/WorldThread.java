@@ -8,7 +8,7 @@ public class WorldThread extends Thread implements World {
 	
 	private volatile float refillSpeed; 
 	private volatile int refillInterval;
-	private volatile boolean alive = true;
+	private volatile boolean alive;
 	
 	private WaterBowlListImpl waterBowlList;
 	

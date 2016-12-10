@@ -63,7 +63,7 @@ public class FlowerPanel extends JPanel{
 			
 			int scaledY = (int)((hydrationLevel/100f)*this.getHeight());
 
-			g2d.setColor(new Color(0.2f,0.6f,0.2f,(float)0.5));
+			g2d.setColor(new Color(0.2f,0.6f,0.8f,(float)0.5));
 			g2d.fillRect(0, this.getHeight()-scaledY, this.getWidth(), scaledY);
 		} else{
 			//dying

@@ -13,10 +13,10 @@ public class FlowerThread extends Thread implements Flower {
 	private volatile int dehydrationCycleCounter = 0;
 	private int number;
 	
-	private WaterBowlListImpl waterBowlList;
+	private WaterBowlList waterBowlList;
 	
 	public FlowerThread(WaterBowlList waterBowlList, int number, float hydrationLevel, float dehydrationLimit, float dehydrationStep){
-		this.waterBowlList = (WaterBowlListImpl)waterBowlList;
+		this.waterBowlList = waterBowlList;
 		this.number = number;
 		
 		this.hydrationLevel = hydrationLevel;
