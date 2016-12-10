@@ -1,6 +1,6 @@
-package view;
+package model;
 
-public interface IWorldGUI {
+public interface World {
 	public void setRefillSpeed(float refillSpeed);
 	public void setRefillInterval(int refillInterval);
 

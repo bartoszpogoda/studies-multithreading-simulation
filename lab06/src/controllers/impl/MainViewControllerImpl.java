@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllers.MainViewController;
-import view.IWaterBowlListGUI;
+import model.WaterBowlList;
 
 public class MainViewControllerImpl implements MainViewController{
 
-	private IWaterBowlListGUI waterBowlList;
+	private WaterBowlList waterBowlList;
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -25,7 +25,7 @@ public class MainViewControllerImpl implements MainViewController{
 	}
 
 	@Override
-	public void setWaterBowlList(IWaterBowlListGUI waterBowlList) {
+	public void setWaterBowlList(WaterBowlList waterBowlList) {
 		this.waterBowlList = waterBowlList;
 		
 	}

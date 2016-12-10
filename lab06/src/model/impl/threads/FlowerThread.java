@@ -1,10 +1,10 @@
-package model.threads;
+package model.impl.threads;
 
 import App.Constants;
-import model.WaterBowlList;
-import view.IFlowerGUI;
+import model.Flower;
+import model.impl.WaterBowlListImpl;
 
-public class Flower extends Thread implements IFlowerGUI {
+public class FlowerThread extends Thread implements Flower {
 
 	private volatile float hydrationLevel;
 	private volatile float dehydrationLimit;
@@ -12,9 +12,9 @@ public class Flower extends Thread implements IFlowerGUI {
 	private volatile int dehydrationCycleCounter = 0;
 	private int number;
 	
-	private WaterBowlList waterBowlList;
+	private WaterBowlListImpl waterBowlList;
 	
-	public Flower(WaterBowlList waterBowlList, int number){
+	public FlowerThread(WaterBowlListImpl waterBowlList, int number){
 		this.waterBowlList = waterBowlList;
 		this.number = number;
 		

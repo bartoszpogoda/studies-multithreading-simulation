@@ -1,19 +1,19 @@
-package controllers;
+package controllers.impl;
 
 import App.Constants;
-import model.WaterBowlList;
-import model.threads.Flower;
+import model.impl.WaterBowlListImpl;
+import model.impl.threads.FlowerThread;
 import view.MainView;
 
-public class ViewRefresher extends Thread {
+public class ViewRefresherThread extends Thread {
 	
 	private MainView mainView;
-	private WaterBowlList waterBowlList;
-	private Flower[] flowers;
+	private WaterBowlListImpl waterBowlList;
+	private FlowerThread[] flowers;
 	
 	private volatile boolean alive;
 	
-	public ViewRefresher(){
+	public ViewRefresherThread(){
 		alive = true;
 	}
 	
@@ -21,11 +21,11 @@ public class ViewRefresher extends Thread {
 		this.mainView = mainView;
 	}
 	
-	public void setWaterBowlList(WaterBowlList waterBowlList) {
+	public void setWaterBowlList(WaterBowlListImpl waterBowlList) {
 		this.waterBowlList = waterBowlList;
 	}
 
-	public void setFlowers(Flower[] flowers) {
+	public void setFlowers(FlowerThread[] flowers) {
 		this.flowers = flowers;
 	}
 

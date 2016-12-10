@@ -1,6 +1,6 @@
-package view;
+package model;
 
-public interface IFlowerGUI {
+public interface Flower {
 	public float getHydrationLevel();
 	
 	public void setDehydrationLimit(float dehydrationLimit);

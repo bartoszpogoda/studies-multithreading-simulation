@@ -1,14 +1,14 @@
-package model.threads;
+package model.impl.threads;
 
-import model.WaterBowlList;
-import view.IWorldGUI;
+import model.World;
+import model.impl.WaterBowlListImpl;
 
-public class World implements Runnable, IWorldGUI {
+public class WorldThread implements Runnable, World {
 	
 	private volatile float refillSpeed;
 	private volatile int refillInterval;
 	
-	private WaterBowlList waterBowlList;
+	private WaterBowlListImpl waterBowlList;
 	
 	@Override
 	public void run() {
@@ -31,7 +31,7 @@ public class World implements Runnable, IWorldGUI {
 		this.refillInterval = hydrationInterval;
 	}
 	
-	public World(WaterBowlList waterBowlList){
+	public WorldThread(WaterBowlListImpl waterBowlList){
 		this.waterBowlList = waterBowlList;
 	}
 

@@ -1,11 +1,11 @@
 package App;
 
 import controllers.MainViewController;
-import controllers.ViewRefresher;
 import controllers.impl.MainViewControllerImpl;
-import model.WaterBowl;
-import model.WaterBowlList;
-import model.threads.Flower;
+import controllers.impl.ViewRefresherThread;
+import model.impl.WaterBowl;
+import model.impl.WaterBowlListImpl;
+import model.impl.threads.FlowerThread;
 import view.MainView;
 import view.impl.MainViewImpl;
 
@@ -14,15 +14,15 @@ public class Main {
 	// polaczyc te watki w jakis ThreadPool czy cos i zrobic przycisk pause + run ? 
 	
 	public static void main(String[] args) {
-		WaterBowlList waterBowlList = new WaterBowlList();
+		WaterBowlListImpl waterBowlList = new WaterBowlListImpl();
 		
-		Flower flower1 = new Flower(waterBowlList,0);
-		Flower flower2 = new Flower(waterBowlList,1);
+		FlowerThread flower1 = new FlowerThread(waterBowlList,0);
+		FlowerThread flower2 = new FlowerThread(waterBowlList,1);
 		
 		MainView mainView = new MainViewImpl();
 		
-		ViewRefresher viewRefresher = new ViewRefresher();
-		viewRefresher.setFlowers(new Flower[]{flower1,flower2});
+		ViewRefresherThread viewRefresher = new ViewRefresherThread();
+		viewRefresher.setFlowers(new FlowerThread[]{flower1,flower2});
 		viewRefresher.setWaterBowlList(waterBowlList);
 		viewRefresher.setMainView(mainView);
 		
