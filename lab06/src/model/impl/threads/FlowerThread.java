@@ -88,4 +88,9 @@ public class FlowerThread extends Thread implements Flower {
 		return dehydrationCycleCounter;
 	}
 
+	@Override
+	public float getDehydrationLimit() {
+		return dehydrationLimit;
+	}
+
 }

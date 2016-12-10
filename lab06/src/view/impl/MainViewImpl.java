@@ -226,7 +226,10 @@ public class MainViewImpl extends JFrame implements MainView {
 	@Override
 	public void setNthFlowerDehydrationCycleCounter(int n, int dehydrationCycleCounter) {
 		flowerPanels[n].setDehydrationCycleCounter(dehydrationCycleCounter);
-		
+	}
+	@Override
+	public void setNthFlowerDehydrationLimit(int n, float dehydrationLimit) {
+		flowerPanels[n].setDehydrationLimit(dehydrationLimit);
 	}
 	@Override
 	public void setMainViewController(MainViewController mainViewController) {

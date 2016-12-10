@@ -13,5 +13,6 @@ public interface MainView {
 	public String getNthFlowerDehydrationLimit(int n);
 	
 	public void setVisible(boolean b);
+	public void setNthFlowerDehydrationLimit(int n, float dehydrationLimit);
 	
 }

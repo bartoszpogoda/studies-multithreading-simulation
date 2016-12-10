@@ -12,6 +12,7 @@ import App.Constants;
 public class FlowerPanel extends JPanel{
 	
 	private float hydrationLevel = 0f;
+	private float dehydrationLimit = 0f;
 	private int dehydrationCycleCounter = 0;
 	private Image flowerImage;
 	
@@ -27,6 +28,11 @@ public class FlowerPanel extends JPanel{
 	
 	public void setFlowerImage(Image flowerImage){
 		this.flowerImage = flowerImage;
+	}
+	
+	public void setDehydrationLimit(float dehydrationLimit){
+		this.dehydrationLimit = dehydrationLimit;
+		repaint();
 	}
 	
 	@Override
@@ -48,7 +54,12 @@ public class FlowerPanel extends JPanel{
 			g2d.setColor(new Color(102,0,0)); 
 			g2d.fillRect(0, 0, getWidth(), getHeight());
 		}
-		else if(dehydrationCycleCounter == 0){
+		else if(dehydrationCycleCounter == 0){ // alive
+			
+			// dehydrationLimit lane draw
+			int scaledDehydrationLimitY = (int)((dehydrationLimit/100f)*this.getHeight());
+			g2d.setColor(Color.RED);
+			g2d.drawLine(0, getHeight() - scaledDehydrationLimitY, getWidth(), getHeight() - scaledDehydrationLimitY);
 			
 			int scaledY = (int)((hydrationLevel/100f)*this.getHeight());
 
