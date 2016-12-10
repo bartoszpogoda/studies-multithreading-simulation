@@ -32,12 +32,17 @@ public class MainViewImpl extends JFrame implements MainView {
 	
 	private FlowerPanel[] flowerPanels;
 	private WaterBowlPanel panelWaterBowl1, panelWaterBowl2, panelWaterBowl3;
-	private JButton btnGardener1, btnGardener2, btnGardener3, btnUpdateData;
+	private JButton btnGardener1, btnGardener2, btnGardener3, btnUpdateData, btnUpdateWorldData;
+	private JTextField tfWorldRefillInterval;
+	private JTextField tfWorldRefillSpeed;
 	
 	public MainViewImpl() {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		this.setSize(800,600);
+		setSize(800,600);
+		
+		this.setLocationRelativeTo(null);
+		
 		
 		getContentPane().setBackground(new Color(240, 255, 255));
 		getContentPane().setLayout(null);
@@ -161,6 +166,39 @@ public class MainViewImpl extends JFrame implements MainView {
 		btnUpdateData.setBounds(200, 171, 550, 25);
 		getContentPane().add(btnUpdateData);
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "\u015Awiat", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBackground(new Color(240, 255, 255));
+		panel.setBounds(30, 212, 140, 187);
+		getContentPane().add(panel);
+		
+		
+		JLabel lblWorldRefillInterval = new JLabel("Interwa\u0142 opad\u00F3w");
+		lblWorldRefillInterval.setBounds(12, 22, 125, 16);
+		panel.add(lblWorldRefillInterval);
+		lblWorldRefillInterval.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		tfWorldRefillInterval = new JTextField();
+		tfWorldRefillInterval.setBounds(12, 51, 116, 22);
+		panel.add(tfWorldRefillInterval);
+		tfWorldRefillInterval.setColumns(10);
+		
+		JLabel lblWorldRefillSpeed = new JLabel("Nasilenie opad\u00F3w");
+		lblWorldRefillSpeed.setBounds(12, 86, 125, 16);
+		panel.add(lblWorldRefillSpeed);
+		lblWorldRefillSpeed.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		tfWorldRefillSpeed = new JTextField();
+		tfWorldRefillSpeed.setBounds(12, 115, 116, 22);
+		panel.add(tfWorldRefillSpeed);
+		tfWorldRefillSpeed.setColumns(10);
+		
+		btnUpdateWorldData = new JButton("Zaktualizuj");
+		btnUpdateWorldData.setBackground(new Color(245, 245, 245));
+		btnUpdateWorldData.setBounds(12, 150, 116, 25);
+		panel.add(btnUpdateWorldData);
+		
 		try {
 			Image flower1 = ImageIO.read(new File("blue_flower.png"));
 			Image flower2 = ImageIO.read(new File("red_flower.png"));
@@ -200,6 +238,8 @@ public class MainViewImpl extends JFrame implements MainView {
 		btnGardener3.setActionCommand("GARDENER_3");
 		btnUpdateData.addActionListener(mainViewController);
 		btnUpdateData.setActionCommand("UPDATE_DATA");
+		btnUpdateWorldData.addActionListener(mainViewController);
+		btnUpdateWorldData.setActionCommand("UPDATE_WORLD_DATA");
 		
 	}
 	@Override

@@ -18,11 +18,12 @@ public class Main {
 		
 		FlowerThread flower1 = new FlowerThread(waterBowlList,0);
 		FlowerThread flower2 = new FlowerThread(waterBowlList,1);
+		FlowerThread flower3 = new FlowerThread(waterBowlList,2);
 		
 		MainView mainView = new MainViewImpl();
 		
 		ViewRefresherThread viewRefresher = new ViewRefresherThread();
-		viewRefresher.setFlowers(new FlowerThread[]{flower1,flower2});
+		viewRefresher.setFlowers(new FlowerThread[]{flower1,flower2,flower3});
 		viewRefresher.setWaterBowlList(waterBowlList);
 		viewRefresher.setMainView(mainView);
 		
@@ -35,6 +36,7 @@ public class Main {
 		
 		flower1.start();
 		flower2.start();
+		flower3.start();
 		
 		mainView.setVisible(true);
 		
