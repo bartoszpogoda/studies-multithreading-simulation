@@ -3,9 +3,14 @@ package view.impl;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
@@ -16,6 +21,8 @@ import view.impl.graphics.WaterBowlPanel;
 
 import javax.swing.border.LineBorder;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 
@@ -153,7 +160,21 @@ public class MainViewImpl extends JFrame implements MainView {
 		btnUpdateData.setBackground(new Color(255, 255, 255));
 		btnUpdateData.setBounds(200, 171, 550, 25);
 		getContentPane().add(btnUpdateData);
+		
+		try {
+			Image flower1 = ImageIO.read(new File("blue_flower.png"));
+			Image flower2 = ImageIO.read(new File("red_flower.png"));
+			Image flower3 = ImageIO.read(new File("yellow_flower.png"));
+			
+			flowerPanels[0].setFlowerImage(flower1);
+			flowerPanels[1].setFlowerImage(flower2);
+			flowerPanels[2].setFlowerImage(flower3);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
+	
 	@Override
 	public void setCurrentWaterLevels(float[] waterLevels) {
 		panelWaterBowl1.setCurrentWaterLevel(waterLevels[0]);

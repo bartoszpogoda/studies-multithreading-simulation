@@ -13,8 +13,7 @@ public class FlowerPanel extends JPanel{
 	
 	private float hydrationLevel = 0f;
 	private int dehydrationCycleCounter = 0;
-	
-	//TODO: private Image flowerImage;
+	private Image flowerImage;
 	
 	public void setHydrationLevel(float hydrationLevel){
 		this.hydrationLevel = hydrationLevel;
@@ -26,6 +25,9 @@ public class FlowerPanel extends JPanel{
 		repaint();
 	}
 	
+	public void setFlowerImage(Image flowerImage){
+		this.flowerImage = flowerImage;
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -33,9 +35,13 @@ public class FlowerPanel extends JPanel{
 		
 		Graphics2D g2d = (Graphics2D)g;
 		
-		//placeholder bef image
-		g2d.setColor(Color.WHITE);
-		g2d.fillRect(0, 0, getWidth(), getHeight());
+		
+		if(flowerImage == null){
+			g2d.setColor(Color.WHITE);
+			g2d.fillRect(0, 0, getWidth(), getHeight());
+		} else{
+			g2d.drawImage(flowerImage, 0, 0, null);
+		}
 		
 		//dead
 		if(dehydrationCycleCounter >= Constants.CYCLES_OF_DEHYDRATION_TO_DIE){
