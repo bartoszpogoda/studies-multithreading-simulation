@@ -33,43 +33,83 @@ public class MainViewControllerImpl implements MainViewController{
 			//data validation
 			float dehydrationLimit, dehydrationStep;
 			try{
-				dehydrationLimit = Float.parseFloat(mainView.getNthFlowerDehydrationLimit(0));
-				dehydrationStep = Float.parseFloat(mainView.getNthFlowerDehydrationStep(0));
+				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[0]);
+				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[0]);
 			}catch(NumberFormatException e){
 				mainView.reportError("Wartoœci musz¹ byæ typu float");
 				return;
 			}
 			flowerThreads[0].kill();
-			flowerThreads[0] = new FlowerThread(waterBowlList, 0, Constants.F1_INIT_HYDRATION_LEVEL, dehydrationLimit, dehydrationStep);
+			flowerThreads[0] = new FlowerThread(waterBowlList, 0, 100f, dehydrationLimit, dehydrationStep);
 			flowerThreads[0].start();
 		}
 		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_2")){
 			//data validation
 			float dehydrationLimit, dehydrationStep;
 			try{
-				dehydrationLimit = Float.parseFloat(mainView.getNthFlowerDehydrationLimit(1));
-				dehydrationStep = Float.parseFloat(mainView.getNthFlowerDehydrationStep(1));
+				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[1]);
+				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[1]);
 			}catch(NumberFormatException e){
 				mainView.reportError("Wartoœci musz¹ byæ typu float");
 				return;
 			}
 			flowerThreads[1].kill();
-			flowerThreads[1] = new FlowerThread(waterBowlList, 1, Constants.F2_INIT_HYDRATION_LEVEL, dehydrationLimit, dehydrationStep);
+			flowerThreads[1] = new FlowerThread(waterBowlList, 1, 100f, dehydrationLimit, dehydrationStep);
 			flowerThreads[1].start();
 		}
 		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_3")){
 			//data validation
 			float dehydrationLimit, dehydrationStep;
 			try{
-				dehydrationLimit = Float.parseFloat(mainView.getNthFlowerDehydrationLimit(2));
-				dehydrationStep = Float.parseFloat(mainView.getNthFlowerDehydrationStep(2));
+				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[2]);
+				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[2]);
 			}catch(NumberFormatException e){
 				mainView.reportError("Wartoœci musz¹ byæ typu float");
 				return;
 			}
 			flowerThreads[2].kill();
-			flowerThreads[2] = new FlowerThread(waterBowlList, 2, Constants.F3_INIT_HYDRATION_LEVEL, dehydrationLimit, dehydrationStep);
+			flowerThreads[2] = new FlowerThread(waterBowlList, 2, 100f, dehydrationLimit, dehydrationStep);
 			flowerThreads[2].start();
+		}
+		else if(arg0.getActionCommand().equalsIgnoreCase("UPDATE_DATA")){
+			//data validation
+			String[] strDehydrationLimits, strDehydrationSteps;
+			strDehydrationLimits = mainView.getFlowerDehydrationLimits();
+			strDehydrationSteps = mainView.getFlowerDehydrationSteps();
+			
+			float[] dehydrationLimits = new float[3];
+			float[] dehydrationSteps = new float[3];
+			
+			try{
+				for(int i=0; i < 3; i++){
+					dehydrationLimits[i] = Float.parseFloat(strDehydrationLimits[i]);
+					dehydrationSteps[i] = Float.parseFloat(strDehydrationSteps[i]);
+				}
+			}catch(NumberFormatException e){
+				mainView.reportError("Wartoœci musz¹ byæ typu float");
+				return;
+			}
+			
+			for(int i=0; i < 3; i++){
+				flowerThreads[i].setDehydrationLimit(dehydrationLimits[i]);
+				flowerThreads[i].setDehydrationStep(dehydrationSteps[i]);
+			}
+		}
+		else if(arg0.getActionCommand().equalsIgnoreCase("UPDATE_WORLD_DATA")){
+			int worldRefillInterval;
+			float worldRefillSpeed;
+			
+			try{
+				worldRefillInterval = Integer.parseInt(mainView.getWorldRefillInterval());
+				worldRefillSpeed = Float.parseFloat(mainView.getWorldRefillSpeed());
+				
+			}catch(NumberFormatException e){
+				mainView.reportError("Interwa³ musi byc ca³kowity (ms), prêdkoœæ typu float");
+				return;
+			}
+			
+			worldThread.setRefillInterval(worldRefillInterval);
+			worldThread.setRefillSpeed(worldRefillSpeed);
 		}
 		
 	}

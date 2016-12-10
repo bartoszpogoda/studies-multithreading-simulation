@@ -33,6 +33,8 @@ public class FlowerThread extends Thread implements Flower {
 			
 			if(hydrationLevel <= dehydrationLimit){
 				drinkingProcess();
+			}else{
+				dehydrationCycleCounter = 0;
 			}
 			
 			dyingProcess();
@@ -60,11 +62,12 @@ public class FlowerThread extends Thread implements Flower {
 	}
 	
 	private void dyingProcess(){
-		if(hydrationLevel <= Constants.DEHYDRATION_DYING_LEVEL){				
+		//flowers are dying when below 1/3 of dehydration limit TODO: make sure ?
+		//instead the cycle counter should reset when flower is up the hydration limit
+		//if(hydrationLevel <= dehydrationLimit/3){				
+		if(hydrationLevel <= 0.01f){				
 			if(hydrationLevel<0) hydrationLevel = 0;
 			dehydrationCycleCounter++;
-		} else{
-			dehydrationCycleCounter = 0;
 		}
 	}
 	

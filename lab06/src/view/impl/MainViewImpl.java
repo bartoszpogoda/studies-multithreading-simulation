@@ -316,17 +316,41 @@ public class MainViewImpl extends JFrame implements MainView {
 		});
 		
 	}
-	@Override
-	public String getNthFlowerDehydrationStep(int n) {
-		return tfDehydrationSteps[n].getText();
-	}
-	@Override
-	public String getNthFlowerDehydrationLimit(int n) {
-		return tfDehydrationLimits[n].getText();
-	}
 
 	@Override
 	public void reportError(String message) {
 		JOptionPane.showMessageDialog(this, message, "B³¹d", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public String getWorldRefillInterval() {
+		return tfWorldRefillInterval.getText();
+	}
+
+	@Override
+	public String getWorldRefillSpeed() {
+		return tfWorldRefillSpeed.getText();
+	}
+
+	@Override
+	public String[] getFlowerDehydrationSteps() {
+		String flowerDehydrationSteps[] = new String[3];
+		
+		for(int i=0; i<3; i++){
+			flowerDehydrationSteps[i] = tfDehydrationSteps[i].getText();
+		}
+		
+		return flowerDehydrationSteps;
+	}
+
+	@Override
+	public String[] getFlowerDehydrationLimits() {
+		String flowerDehydrationLimits[] = new String[3];
+		
+		for(int i=0; i<3; i++){
+			flowerDehydrationLimits[i] = tfDehydrationLimits[i].getText();
+		}
+		
+		return flowerDehydrationLimits;
 	}
 }

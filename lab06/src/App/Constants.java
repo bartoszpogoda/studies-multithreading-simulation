@@ -2,7 +2,7 @@ package App;
 
 public class Constants {
 	public static final int DEHYDRATION_MS_INTERAVAL = 50;
-	public static final int CYCLES_OF_DEHYDRATION_TO_DIE = 10;
+	public static final int CYCLES_OF_DEHYDRATION_TO_DIE = 50;
 	public static final float DEHYDRATION_DYING_LEVEL = 0.5f;
 	
 	//flower 1 defaults
@@ -25,7 +25,7 @@ public class Constants {
 	public static final int WATER_BOWL_WATER_INIT_LEVEL = 100;
 	
 	//view refresher
-	public static final int VIEW_REFRESHER_INTERVAL = 1;
+	public static final int VIEW_REFRESHER_INTERVAL = 32;
 	
 	//world constants
 	public static final float WORLD_INIT_REFILL_SPEED = 0.77f;

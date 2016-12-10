@@ -9,8 +9,11 @@ public interface MainView {
 	
 	public void setMainViewController(MainViewController mainViewController);
 	
-	public String getNthFlowerDehydrationStep(int n);
-	public String getNthFlowerDehydrationLimit(int n);
+	public String[] getFlowerDehydrationSteps();
+	public String[] getFlowerDehydrationLimits();
+	
+	public String getWorldRefillInterval();
+	public String getWorldRefillSpeed();
 	
 	public void setVisible(boolean b);
 	public void setNthFlowerDehydrationLimit(int n, float dehydrationLimit);
