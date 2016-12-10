@@ -29,6 +29,10 @@ public class ViewRefresherThread extends Thread {
 		this.flowers = flowers;
 	}
 
+	public void kill(){
+		alive=false;
+	}
+	
 	/**
 	 * should refresh view with data from all flowers and bowls
 	 */

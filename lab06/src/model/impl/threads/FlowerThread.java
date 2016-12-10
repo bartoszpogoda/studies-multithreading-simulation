@@ -2,6 +2,7 @@ package model.impl.threads;
 
 import App.Constants;
 import model.Flower;
+import model.WaterBowlList;
 import model.impl.WaterBowlListImpl;
 
 public class FlowerThread extends Thread implements Flower {
@@ -14,8 +15,8 @@ public class FlowerThread extends Thread implements Flower {
 	
 	private WaterBowlListImpl waterBowlList;
 	
-	public FlowerThread(WaterBowlListImpl waterBowlList, int number, float hydrationLevel, float dehydrationLimit, float dehydrationStep){
-		this.waterBowlList = waterBowlList;
+	public FlowerThread(WaterBowlList waterBowlList, int number, float hydrationLevel, float dehydrationLimit, float dehydrationStep){
+		this.waterBowlList = (WaterBowlListImpl)waterBowlList;
 		this.number = number;
 		
 		this.hydrationLevel = hydrationLevel;
@@ -59,8 +60,8 @@ public class FlowerThread extends Thread implements Flower {
 	}
 	
 	private void dyingProcess(){
-		if(hydrationLevel <= 0){				
-			hydrationLevel = 0;
+		if(hydrationLevel <= Constants.DEHYDRATION_DYING_LEVEL){				
+			if(hydrationLevel<0) hydrationLevel = 0;
 			dehydrationCycleCounter++;
 		} else{
 			dehydrationCycleCounter = 0;
@@ -91,6 +92,10 @@ public class FlowerThread extends Thread implements Flower {
 	@Override
 	public float getDehydrationLimit() {
 		return dehydrationLimit;
+	}
+	
+	public void kill(){
+		dehydrationCycleCounter = Constants.CYCLES_OF_DEHYDRATION_TO_DIE;
 	}
 
 }

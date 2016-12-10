@@ -1,26 +1,35 @@
 package model.impl.threads;
 
+import App.Constants;
 import model.World;
 import model.impl.WaterBowlListImpl;
 
-public class WorldThread implements Runnable, World {
+public class WorldThread extends Thread implements World {
 	
-	private volatile float refillSpeed;
+	private volatile float refillSpeed; 
 	private volatile int refillInterval;
+	private volatile boolean alive;
 	
 	private WaterBowlListImpl waterBowlList;
 	
+	public WorldThread() {
+		refillSpeed = Constants.WORLD_INIT_REFILL_SPEED;
+		refillInterval = Constants.WORLD_INIT_REFILL_INTERVAL;
+		alive = true;
+	}
+	
 	@Override
 	public void run() {
-		
-		waterBowlList.refillAll(refillSpeed);
-		
-		try {
-			Thread.sleep(refillInterval);
-		} catch (InterruptedException e) {
+		while(alive){
+			waterBowlList.refillAll(refillSpeed);
 			
+			try {
+				Thread.sleep(refillInterval);
+			} catch (InterruptedException e) {
+				
+			}
 		}
-
+		System.out.println("World has just died");
 	}
 	
 	public void setHydrationStep(float hydrationStep){
@@ -44,4 +53,9 @@ public class WorldThread implements Runnable, World {
 	public void setRefillInterval(int refillInterval) {
 		this.refillInterval = refillInterval;
 	}
+	
+	public void kill(){
+		alive = false;
+	}
+
 }

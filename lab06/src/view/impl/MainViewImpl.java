@@ -8,12 +8,16 @@ import javax.imageio.stream.ImageInputStream;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
+import App.Constants;
 import controllers.MainViewController;
 import view.MainView;
 import view.impl.graphics.FlowerPanel;
@@ -35,6 +39,9 @@ public class MainViewImpl extends JFrame implements MainView {
 	private JButton btnGardener1, btnGardener2, btnGardener3, btnUpdateData, btnUpdateWorldData;
 	private JTextField tfWorldRefillInterval;
 	private JTextField tfWorldRefillSpeed;
+	private JButton btnRestartFlower1;
+	private JButton btnRestartFlower2;
+	private JButton btnRestartFlower3;
 	
 	public MainViewImpl() {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -42,6 +49,7 @@ public class MainViewImpl extends JFrame implements MainView {
 		setSize(800,600);
 		
 		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
 		getContentPane().setBackground(new Color(240, 255, 255));
@@ -199,6 +207,31 @@ public class MainViewImpl extends JFrame implements MainView {
 		btnUpdateWorldData.setBounds(12, 150, 116, 25);
 		panel.add(btnUpdateWorldData);
 		
+		btnRestartFlower1 = new JButton("");
+		btnRestartFlower1.setBackground(new Color(0, 0, 255));
+		btnRestartFlower1.setBounds(265, 13, 25, 16);
+		getContentPane().add(btnRestartFlower1);
+		
+		btnRestartFlower2 = new JButton("");
+		btnRestartFlower2.setBackground(new Color(255, 0, 0));
+		btnRestartFlower2.setBounds(455, 12, 25, 16);
+		getContentPane().add(btnRestartFlower2);
+		
+		btnRestartFlower3 = new JButton("");
+		btnRestartFlower3.setBackground(new Color(255, 255, 0));
+		btnRestartFlower3.setBounds(660, 13, 25, 16);
+		getContentPane().add(btnRestartFlower3);
+		
+		tfDehydrationSteps[0].setText(Float.toString(Constants.F1_INIT_DEHYDRATION_STEP));
+		tfDehydrationSteps[1].setText(Float.toString(Constants.F2_INIT_DEHYDRATION_STEP));
+		tfDehydrationSteps[2].setText(Float.toString(Constants.F3_INIT_DEHYDRATION_STEP));
+		
+		tfDehydrationLimits[0].setText(Float.toString(Constants.F1_INIT_DEHYDRATION_LIMIT));
+		tfDehydrationLimits[1].setText(Float.toString(Constants.F2_INIT_DEHYDRATION_LIMIT));
+		tfDehydrationLimits[2].setText(Float.toString(Constants.F3_INIT_DEHYDRATION_LIMIT));
+
+		tfWorldRefillInterval.setText(Integer.toString(Constants.WORLD_INIT_REFILL_INTERVAL));
+		tfWorldRefillSpeed.setText(Float.toString(Constants.WORLD_INIT_REFILL_SPEED));
 		try {
 			Image flower1 = ImageIO.read(new File("blue_flower.png"));
 			Image flower2 = ImageIO.read(new File("red_flower.png"));
@@ -233,16 +266,54 @@ public class MainViewImpl extends JFrame implements MainView {
 	}
 	@Override
 	public void setMainViewController(MainViewController mainViewController) {
+		//gardeners
 		btnGardener1.addActionListener(mainViewController);
 		btnGardener1.setActionCommand("GARDENER_1");
 		btnGardener2.addActionListener(mainViewController);
 		btnGardener2.setActionCommand("GARDENER_2");
 		btnGardener3.addActionListener(mainViewController);
 		btnGardener3.setActionCommand("GARDENER_3");
+		
+		//data updates
 		btnUpdateData.addActionListener(mainViewController);
 		btnUpdateData.setActionCommand("UPDATE_DATA");
 		btnUpdateWorldData.addActionListener(mainViewController);
 		btnUpdateWorldData.setActionCommand("UPDATE_WORLD_DATA");
+		
+		//restarts
+		btnRestartFlower1.addActionListener(mainViewController);
+		btnRestartFlower1.setActionCommand("RESTART_FLOWER_1");
+		btnRestartFlower2.addActionListener(mainViewController);
+		btnRestartFlower2.setActionCommand("RESTART_FLOWER_2");
+		btnRestartFlower3.addActionListener(mainViewController);
+		btnRestartFlower3.setActionCommand("RESTART_FLOWER_3");
+		
+		//terminate threads on window close
+		this.addWindowListener(new WindowListener(){
+			@Override
+			public void windowActivated(WindowEvent arg0) {}
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) { 
+				mainViewController.terminateThreads();
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent arg0) {}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {	}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) { }
+			
+		});
 		
 	}
 	@Override
@@ -252,5 +323,10 @@ public class MainViewImpl extends JFrame implements MainView {
 	@Override
 	public String getNthFlowerDehydrationLimit(int n) {
 		return tfDehydrationLimits[n].getText();
+	}
+
+	@Override
+	public void reportError(String message) {
+		JOptionPane.showMessageDialog(this, message, "B³¹d", JOptionPane.ERROR_MESSAGE);
 	}
 }
