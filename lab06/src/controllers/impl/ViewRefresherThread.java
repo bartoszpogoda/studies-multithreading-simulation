@@ -1,6 +1,7 @@
 package controllers.impl;
 
 import App.Constants;
+import helper.RandomModule;
 import model.impl.WaterBowlListImpl;
 import model.impl.threads.FlowerThread;
 import view.MainView;
@@ -56,6 +57,9 @@ public class ViewRefresherThread extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			// randomness monitor refresh
+			mainView.setRandomnessAverage(RandomModule.getInstance().getCurrentAverage());
 		}
 	}
 }

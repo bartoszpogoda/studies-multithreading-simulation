@@ -5,9 +5,14 @@ import java.util.Random;
 public class RandomModule {
 	
 	private Random random;
+	
+	private float average;
+	private int n;
 
 	private RandomModule(){
 		this.random = new Random();
+		average = 0;
+		n = 0;
 	}
 	
 	// singleton
@@ -19,6 +24,10 @@ public class RandomModule {
 		return instance;
 	}
 	
+	private void recalculateAverage(float nextFloat){
+		average = (n*average + nextFloat)/(n+1);
+		n++;
+	}
 	
 	/**
 	 * 
@@ -31,8 +40,17 @@ public class RandomModule {
 		boolean positive = random.nextBoolean();
 		
 		float randomFloat = random.nextFloat();
-		float randomValue = randomFloat*(((float)percentage/(float)100)*value);
+		float randomScale = randomFloat*(((float)percentage/(float)100));
+		float randomValue = randomScale*value;
 		
-		return positive ? (randomValue) : (-randomValue);
+		float result = positive ? (randomValue) : (-randomValue);
+		
+		recalculateAverage(positive ? (randomScale) : (-randomScale));
+		
+		return result;
+	}
+
+	public float getCurrentAverage() {
+		return average;
 	}
 }

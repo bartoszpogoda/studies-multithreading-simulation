@@ -4,6 +4,7 @@ public class Constants {
 	public static final int DEHYDRATION_MS_INTERAVAL = 50;
 	public static final int CYCLES_OF_DEHYDRATION_TO_DIE = 50;
 	public static final float DEHYDRATION_DYING_LEVEL = 0.5f;
+	public static final int RANDOMNESS_IN_PERCENTS = 5;
 	
 	//flower 1 defaults
 	public static final float F1_INIT_HYDRATION_LEVEL = 87.5f;

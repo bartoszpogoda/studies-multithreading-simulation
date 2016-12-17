@@ -3,6 +3,7 @@ package view.impl;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.annotation.Resources;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 import App.Constants;
+import App.Main;
 import controllers.MainViewController;
 import view.MainView;
 import view.impl.graphics.FlowerPanel;
@@ -42,6 +44,8 @@ public class MainViewImpl extends JFrame implements MainView {
 	private JButton btnRestartFlower1;
 	private JButton btnRestartFlower2;
 	private JButton btnRestartFlower3;
+	private JLabel lblRandomnessMonitor;
+	private JLabel lblLosowo;
 	
 	public MainViewImpl() {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -232,10 +236,22 @@ public class MainViewImpl extends JFrame implements MainView {
 
 		tfWorldRefillInterval.setText(Integer.toString(Constants.WORLD_INIT_REFILL_INTERVAL));
 		tfWorldRefillSpeed.setText(Float.toString(Constants.WORLD_INIT_REFILL_SPEED));
+		
+		lblRandomnessMonitor = new JLabel("Rand Monitor");
+		lblRandomnessMonitor.setForeground(Color.GREEN);
+		lblRandomnessMonitor.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRandomnessMonitor.setBounds(109, 434, 61, 25);
+		getContentPane().add(lblRandomnessMonitor);
+		
+		lblLosowo = new JLabel("Losowo\u015B\u0107:");
+		lblLosowo.setForeground(Color.BLACK);
+		lblLosowo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblLosowo.setBounds(26, 434, 74, 25);
+		getContentPane().add(lblLosowo);
 		try {
-			Image flower1 = ImageIO.read(new File("blue_flower.png"));
-			Image flower2 = ImageIO.read(new File("red_flower.png"));
-			Image flower3 = ImageIO.read(new File("yellow_flower.png"));
+			Image flower1 = ImageIO.read(new File("./resources/blue_flower.png")); 
+			Image flower2 = ImageIO.read(new File("./resources/red_flower.png"));
+			Image flower3 = ImageIO.read(new File("./resources/yellow_flower.png"));
 			
 			flowerPanels[0].setFlowerImage(flower1);
 			flowerPanels[1].setFlowerImage(flower2);
@@ -352,5 +368,18 @@ public class MainViewImpl extends JFrame implements MainView {
 		}
 		
 		return flowerDehydrationLimits;
+	}
+
+	@Override
+	public void setRandomnessAverage(float currentAverage) {
+		if(currentAverage < 0){
+			lblRandomnessMonitor.setForeground(Color.green);
+			lblRandomnessMonitor.setText(String.format ("%.4f", -currentAverage));
+		}
+		else{
+			lblRandomnessMonitor.setForeground(Color.red);
+			lblRandomnessMonitor.setText(String.format ("%.4f", currentAverage));
+		}
+		
 	}
 }

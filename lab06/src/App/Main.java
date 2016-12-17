@@ -19,6 +19,7 @@ public class Main {
 	public static void main(String[] args) {
 		WaterBowlListImpl waterBowlList = new WaterBowlListImpl();
 		
+		
 		FlowerThread flower1 = new FlowerThread(waterBowlList,0,Constants.F1_INIT_HYDRATION_LEVEL,Constants.F1_INIT_DEHYDRATION_LIMIT,Constants.F1_INIT_DEHYDRATION_STEP);
 		FlowerThread flower2 = new FlowerThread(waterBowlList,1,Constants.F2_INIT_HYDRATION_LEVEL,Constants.F2_INIT_DEHYDRATION_LIMIT,Constants.F2_INIT_DEHYDRATION_STEP);
 		FlowerThread flower3 = new FlowerThread(waterBowlList,2,Constants.F3_INIT_HYDRATION_LEVEL,Constants.F3_INIT_DEHYDRATION_LIMIT,Constants.F3_INIT_DEHYDRATION_STEP);

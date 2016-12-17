@@ -1,6 +1,7 @@
 package model.impl.threads;
 
 import App.Constants;
+import helper.RandomModule;
 import model.Flower;
 import model.WaterBowlList;
 import model.impl.WaterBowlListImpl;
@@ -50,7 +51,7 @@ public class FlowerThread extends Thread implements Flower {
 	}
 	
 	private void dehydratingProcess(){
-		hydrationLevel -= dehydrationStep;
+		hydrationLevel -= (dehydrationStep + RandomModule.getInstance().getRandomFloatInPercentageRange(dehydrationStep, Constants.RANDOMNESS_IN_PERCENTS));
 		
 		if(hydrationLevel < 0) hydrationLevel = 0;
 	}
@@ -65,7 +66,7 @@ public class FlowerThread extends Thread implements Flower {
 		//flowers are dying when below 1/3 of dehydration limit TODO: make sure ?
 		//instead the cycle counter should reset when flower is up the hydration limit
 		//if(hydrationLevel <= dehydrationLimit/3){				
-		if(hydrationLevel <= 0.01f){				
+		if(hydrationLevel <= dehydrationLimit/3){				
 			if(hydrationLevel<0) hydrationLevel = 0;
 			dehydrationCycleCounter++;
 		}

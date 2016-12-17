@@ -19,5 +19,6 @@ public interface MainView {
 	public void setNthFlowerDehydrationLimit(int n, float dehydrationLimit);
 	
 	public void reportError(String errorMessage);
+	public void setRandomnessAverage(float currentAverage);
 	
 }
