@@ -9,13 +9,21 @@ import model.impl.threads.WorldThread;
 import view.MainView;
 
 public interface MainViewController extends ActionListener {
-	public void setWaterBowlList(WaterBowlList waterBowlList);
 
-	public void setFlowerThreads(FlowerThread[] flowerThreads);
-	public void setWorldThread(WorldThread worldThread);
-	public void setViewRefresherThread(ViewRefresherThread viewRefresherThread);
-	
-	public void terminateThreads();
+	// dependencies
+	void setWaterBowlList(WaterBowlList waterBowlList);
+
+	void setFlowerThreads(FlowerThread[] flowerThreads);
+
+	void setWorldThread(WorldThread worldThread);
+
+	void setViewRefresherThread(ViewRefresherThread viewRefresherThread);
 
 	void setMainView(MainView mainView);
+
+	/**
+	 * kills all threads
+	 */
+	void terminateThreads();
+
 }

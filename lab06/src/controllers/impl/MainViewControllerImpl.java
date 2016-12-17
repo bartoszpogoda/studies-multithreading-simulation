@@ -10,133 +10,112 @@ import model.impl.threads.FlowerThread;
 import model.impl.threads.WorldThread;
 import view.MainView;
 
-public class MainViewControllerImpl implements MainViewController{
+public class MainViewControllerImpl implements MainViewController {
 
 	private WaterBowlList waterBowlList;
 	private FlowerThread[] flowerThreads;
 	private WorldThread worldThread;
 	private ViewRefresherThread viewRefresherThread;
 	private MainView mainView;
-	
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(arg0.getActionCommand().equalsIgnoreCase("GARDENER_1")){
-			waterBowlList.refill(0);
+		if (arg0.getActionCommand().contains("GARDENER")) {
+			int id = -1;
+			
+			if(arg0.getActionCommand().endsWith("1")) id = 0;
+			else if(arg0.getActionCommand().endsWith("2")) id = 1;
+			else if(arg0.getActionCommand().endsWith("3")) id = 2;
+			
+			waterBowlList.refill(id);
 		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("GARDENER_2")){
-			waterBowlList.refill(1);
-		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("GARDENER_3")){
-			waterBowlList.refill(2);
-		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_1")){
-			//data validation
+		else if (arg0.getActionCommand().contains("RESTART_FLOWER")){
+			int id = -1;
+			
+			if(arg0.getActionCommand().endsWith("1")) id = 0;
+			else if(arg0.getActionCommand().endsWith("2")) id = 1;
+			else if(arg0.getActionCommand().endsWith("3")) id = 2;
+
 			float dehydrationLimit, dehydrationStep;
-			try{
-				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[0]);
-				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[0]);
-			}catch(NumberFormatException e){
+			
+			try {
+				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[id]);
+				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[id]);
+			} catch (NumberFormatException e) {
 				mainView.reportError("Wartoœci musz¹ byæ typu float");
 				return;
 			}
-			flowerThreads[0].kill();
-			flowerThreads[0] = new FlowerThread(waterBowlList, 0, 100f, dehydrationLimit, dehydrationStep);
-			flowerThreads[0].start();
+			
+			flowerThreads[id].kill();
+			flowerThreads[id] = new FlowerThread(waterBowlList, id, 100f, dehydrationLimit, dehydrationStep);
+			flowerThreads[id].start();
 		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_2")){
-			//data validation
-			float dehydrationLimit, dehydrationStep;
-			try{
-				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[1]);
-				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[1]);
-			}catch(NumberFormatException e){
-				mainView.reportError("Wartoœci musz¹ byæ typu float");
-				return;
-			}
-			flowerThreads[1].kill();
-			flowerThreads[1] = new FlowerThread(waterBowlList, 1, 100f, dehydrationLimit, dehydrationStep);
-			flowerThreads[1].start();
-		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("RESTART_FLOWER_3")){
-			//data validation
-			float dehydrationLimit, dehydrationStep;
-			try{
-				dehydrationLimit = Float.parseFloat(mainView.getFlowerDehydrationLimits()[2]);
-				dehydrationStep = Float.parseFloat(mainView.getFlowerDehydrationSteps()[2]);
-			}catch(NumberFormatException e){
-				mainView.reportError("Wartoœci musz¹ byæ typu float");
-				return;
-			}
-			flowerThreads[2].kill();
-			flowerThreads[2] = new FlowerThread(waterBowlList, 2, 100f, dehydrationLimit, dehydrationStep);
-			flowerThreads[2].start();
-		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("UPDATE_DATA")){
-			//data validation
+		else if (arg0.getActionCommand().equalsIgnoreCase("UPDATE_DATA")) {
 			String[] strDehydrationLimits, strDehydrationSteps;
+			
 			strDehydrationLimits = mainView.getFlowerDehydrationLimits();
 			strDehydrationSteps = mainView.getFlowerDehydrationSteps();
-			
+
 			float[] dehydrationLimits = new float[3];
 			float[] dehydrationSteps = new float[3];
-			
-			try{
-				for(int i=0; i < 3; i++){
+
+			try {
+				for (int i = 0; i < 3; i++) {
 					dehydrationLimits[i] = Float.parseFloat(strDehydrationLimits[i]);
 					dehydrationSteps[i] = Float.parseFloat(strDehydrationSteps[i]);
 				}
-			}catch(NumberFormatException e){
+			} catch (NumberFormatException e) {
 				mainView.reportError("Wartoœci musz¹ byæ typu float");
 				return;
 			}
-			
-			for(int i=0; i < 3; i++){
+
+			for (int i = 0; i < 3; i++) {
 				flowerThreads[i].setDehydrationLimit(dehydrationLimits[i]);
 				flowerThreads[i].setDehydrationStep(dehydrationSteps[i]);
 			}
-		}
-		else if(arg0.getActionCommand().equalsIgnoreCase("UPDATE_WORLD_DATA")){
+		} 
+		else if (arg0.getActionCommand().equalsIgnoreCase("UPDATE_WORLD_DATA")) {
 			int worldRefillInterval;
 			float worldRefillSpeed;
-			
-			try{
+
+			try {
 				worldRefillInterval = Integer.parseInt(mainView.getWorldRefillInterval());
 				worldRefillSpeed = Float.parseFloat(mainView.getWorldRefillSpeed());
-				
-			}catch(NumberFormatException e){
+
+			} catch (NumberFormatException e) {
 				mainView.reportError("Interwa³ musi byc ca³kowity (ms), prêdkoœæ typu float");
 				return;
 			}
-			
+
 			worldThread.setRefillInterval(worldRefillInterval);
 			worldThread.setRefillSpeed(worldRefillSpeed);
 		}
-		
+
 	}
 
 	@Override
 	public void setWaterBowlList(WaterBowlList waterBowlList) {
 		this.waterBowlList = waterBowlList;
-		
+
 	}
-	
+
 	@Override
 	public void setFlowerThreads(FlowerThread[] flowerThreads) {
 		this.flowerThreads = flowerThreads;
-		
+
 	}
-	
+
 	@Override
 	public void setMainView(MainView mainView) {
 		this.mainView = mainView;
-		
+
 	}
 
 	@Override
 	public void terminateThreads() {
-		for(FlowerThread flowerThread : flowerThreads)
+		for (FlowerThread flowerThread : flowerThreads)
 			flowerThread.kill();
-		
+
 		worldThread.kill();
 		viewRefresherThread.kill();
 	}
@@ -144,15 +123,13 @@ public class MainViewControllerImpl implements MainViewController{
 	@Override
 	public void setWorldThread(WorldThread worldThread) {
 		this.worldThread = worldThread;
-		
+
 	}
 
 	@Override
 	public void setViewRefresherThread(ViewRefresherThread viewRefresherThread) {
 		this.viewRefresherThread = viewRefresherThread;
-		
+
 	}
-	
-	
 
 }
